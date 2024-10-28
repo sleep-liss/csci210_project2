@@ -14,7 +14,7 @@ void mkdir(char pathName[]){
     // YOUR CODE TO REPLACE THE PRINTF FUNCTION BELOW
 
     if (pathName[0] == '\0') {
-	    printf("MKDIR ERROR: no path provided");
+	    printf("MKDIR ERROR: no path provided\n");
 	    return;
     }
 
@@ -22,7 +22,7 @@ void mkdir(char pathName[]){
     struct NODE *parent = splitPath(pathName, baseName, dirName);
 
     if (parent == NULL) {
-	    printf("MKDIR ERROR: directory %s does not exist", dirName);
+	    //printf("MKDIR ERROR: directory %s does not exist\n", dirName);
 	    return;
     }
 
@@ -30,7 +30,7 @@ void mkdir(char pathName[]){
     struct NODE *existingChild = parent->childPtr;
     while (existingChild) {
 	    if (strcmp(existingChild->name, baseName) == 0) {
-		    printf("MKDIR ERROR: directory %s already exists", baseName);
+		    printf("MKDIR ERROR: directory %s already exists\n", baseName);
 		    return;
 	    }
 	    existingChild = existingChild->siblingPtr;
@@ -40,7 +40,7 @@ void mkdir(char pathName[]){
     //creating & linking new dir node
     struct NODE *newDir = (struct NODE *)malloc(sizeof(struct NODE));
     if (newDir == NULL) {
-	    printf("MKDIR ERROR: memory allocation failed");
+	    printf("MKDIR ERROR: memory allocation failed\n");
 	    return;
     }
 
@@ -106,7 +106,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
 		    child = child->siblingPtr;
 	    }
 	    if (child == NULL) {
-		    printf("ERROR: directory %s does not exist", token);
+		    printf("ERROR: directory %s does not exist\n", token);
 		    return NULL;
 	    }
 
