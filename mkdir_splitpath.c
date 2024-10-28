@@ -12,15 +12,17 @@ void mkdir(char pathName[]){
     // TO BE IMPLEMENTED
     //
     // YOUR CODE TO REPLACE THE PRINTF FUNCTION BELOW
+
     if (pathName[0] == '\0') {
-	    printf("MKDIR ERROR: no path provided\n");
+	    printf("MKDIR ERROR: no path provided");
+	    return;
     }
 
     char dirName[128], baseName[65];
     struct NODE *parent = splitPath(pathName, baseName, dirName);
 
     if (parent == NULL) {
-	    printf("MKDIR ERROR: directory %s does not exist\n", dirName);
+	    printf("MKDIR ERROR: directory %s does not exist", dirName);
 	    return;
     }
 
@@ -28,7 +30,7 @@ void mkdir(char pathName[]){
     struct NODE *existingChild = parent->childPtr;
     while (existingChild) {
 	    if (strcmp(existingChild->name, baseName) == 0) {
-		    printf("MKDIR ERROR: directory %s already exists\n", baseName);
+		    printf("MKDIR ERROR: directory %s already exists", baseName);
 		    return;
 	    }
 	    existingChild = existingChild->siblingPtr;
@@ -38,7 +40,7 @@ void mkdir(char pathName[]){
     //creating & linking new dir node
     struct NODE *newDir = (struct NODE *)malloc(sizeof(struct NODE));
     if (newDir == NULL) {
-	    printf("MKDIR ERROR: memory allocation failed\n");
+	    printf("MKDIR ERROR: memory allocation failed");
 	    return;
     }
 
@@ -59,7 +61,7 @@ void mkdir(char pathName[]){
 	    sibling->siblingPtr = newDir;
     }
 
-    printf("MKDIR SUCCESS: node %s created\n", pathName);
+      printf("MKDIR SUCCESS: node %s successfully created\n", pathName);
 }
 
 //handles tokenizing and absolute/relative pathing options
@@ -104,7 +106,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
 		    child = child->siblingPtr;
 	    }
 	    if (child == NULL) {
-		    printf("ERROR: directory %s does not exist\n", token);
+		    printf("ERROR: directory %s does not exist", token);
 		    return NULL;
 	    }
 
